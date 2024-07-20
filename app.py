@@ -18,7 +18,7 @@ def create_app():
     #limiter requires key_func to tell it how to target people. using a remote address tells it to target based in IP addresses
     limiter = Limiter(
         key_func=get_remote_address,
-        default_limits=["200 per day", "3 per sec"]
+        default_limits=["200 per day", "3 per second"]
     )
     limiter.init_app(app)
 

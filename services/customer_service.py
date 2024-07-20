@@ -2,7 +2,7 @@ from database import db
 from models.customer import Customer
 from sqlalchemy import select
 
-def save_customer(customer_data):
+def save(customer_data):
     new_customer = Customer(
         customer_name=customer_data['customer_name'], 
         email=customer_data['email'], 
@@ -17,3 +17,7 @@ def find_all_customers():
     query = select(Customer)
     all_customers = db.session.execute(query).scalars().all()
     return all_customers
+
+def find_all_paginate(page, per_page):
+    customers = db.paginate(select(Customer), page=page, per_page=per_page)
+    return customers
